@@ -20,3 +20,5 @@ cask "free-ruler"
 cask "the-unarchiver"
 cask "rectangle"
 cask "font-cascadia" # https://github.com/microsoft/cascadia-code
+cask "adoptopenjdk8"
+cask "android-sdk"

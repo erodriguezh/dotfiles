@@ -2,18 +2,19 @@
 
 main() {
     ask_for_sudo
-    install_xcode_command_line_tools # to get "git", needed for clone_dotfiles_repo
-    clone_dotfiles_repo
-    install_homebrew
-    install_packages_with_brewfile
-    change_shell_to_zsh
-    setup_antibody
-    install_node
-    install_npm_packages
-    setup_vscode
-    setup_symlinks
-    setup_macOS_defaults
-    update_login_items
+    # install_xcode_command_line_tools # to get "git", needed for clone_dotfiles_repo
+    # clone_dotfiles_repo
+    # install_homebrew
+    # install_packages_with_brewfile
+    # change_shell_to_zsh
+    # setup_antibody
+    # install_node
+    # install_npm_packages
+    install_mobile_dependencies
+    # setup_vscode
+    # setup_symlinks
+    # setup_macOS_defaults
+    # update_login_items
 }
 
 DOTFILES_REPO=~/dotfiles
@@ -130,6 +131,13 @@ function change_shell_to_zsh() {
         else
             error "Please try setting zsh shell again"
         fi
+        substep "Setting proper permissions for zsh"
+        if sudo chmod -R 755 /usr/local/share/zsh && \
+           sudo chown -R "$user":staff /usr/local/share/zsh; then
+            success "zsh shell successfully set for \"${user}\""
+        else
+            error "Failed to set proper permissions to zsh"
+        fi
     fi
 }
 
@@ -145,15 +153,16 @@ function install_node() {
         substep "Installing nvm"
 
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | zsh
+        source ~/.zshrc
     else
         success "NVM is already installed. Skipping.."
     fi
-    substep "Install latest Node LTS version"
-    if yes | nvm install --lts 2> /dev/null; then
-        substep "Node LTS version succeeded"
+    
+    if which node > /dev/null; then
+        success "node is already installed, skipping..."
     else
-        error "Node LTS version failed"
-        exit 1
+        substep "Install latest Node LTS version"
+        nvm install --lts
     fi
     success "node installation done"
 }
@@ -208,6 +217,32 @@ function pull_latest() {
     fi
 }
 
+function install_mobile_dependencies() {
+    info "Installing Mobile dependencies"
+    if command -v tns >/dev/null; then
+        substep "Adding Nativescript dependencies"
+        if gem_is_installed "xcodeproj"; then
+            success "gem xcodeproj is already installed"
+        else
+            sudo gem install xcodeproj
+        fi
+        if gem_is_installed "cocoapods"; then
+            success "gem cocoapods is already installed"
+        else
+            sudo gem install cocoapods
+        fi
+        substep "Setup Cocoapods"
+        pod setup
+        substep "Install python six package"
+        /usr/local/bin/pip3 install six
+        substep "Install Android SDK dependencies"
+        /usr/local/share/android-sdk/tools/bin/sdkmanager "tools" "emulator" "platform-tools" "platforms;android-29" "build-tools;29.0.3" "extras;android;m2repository" "extras;google;m2repository"
+    else
+        success "Nativescript is already installed"
+    fi
+    success "Mobile dependencies successfully installed"
+}
+
 function setup_vscode() {
     info "Setting up vscode"
     if command -v code >/dev/null; then
@@ -218,11 +253,11 @@ function setup_vscode() {
         fi
         mkdir -p "$VSCODE_HOME/User"
 
-        ln -sf "$DOTFILES/vscode/settings.json" "$VSCODE_HOME/User/settings.json"
+        ln -sf "$DOTFILES_REPO/vscode/settings.json" "$VSCODE_HOME/User/settings.json"
 
         while read -r module; do
             code --install-extension "$module" || true
-        done <"$DOTFILES/vscode/extensions.txt"
+        done <"$DOTFILES_REPO/vscode/extensions.txt"
         success "vscode successfully setup"
     else
         error "Setting up vscode failed"
@@ -329,6 +364,14 @@ function success() {
 
 function error() {
     coloredEcho "$1" red "========>"
+}
+
+function gem_is_installed() {
+  if [[ -z "${1:-}" ]]
+  then
+    error "No gem name specified.\n" && exit 1
+  fi
+  [[ "$(gem query -i -n "^t$")" == "true" ]]
 }
 
 if [ "${1}" != "--source-only" ]; then

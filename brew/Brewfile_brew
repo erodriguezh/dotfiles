@@ -6,3 +6,4 @@ brew "grep"
 brew "zsh"
 brew "gmp"
 brew "antibody" # https://getantibody.github.io/links/
+brew "python" # Nativescript

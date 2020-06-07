@@ -3,10 +3,20 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,exports,aliases,functions,extra}; do
+for file in ~/.config/zsh/{path,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
+
+# activate NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+###-tns-completion-start-###
+if [ -f /Users/erodr/.tnsrc ]; then 
+  source /Users/erodr/.tnsrc 
+fi
+###-tns-completion-end-###
 
 # Case-insensitive globbing (used in pathname expansion)
 setopt nocaseglob;
@@ -15,4 +25,4 @@ setopt nocaseglob;
 setopt histappend;
 
 # Autocorrect typos in path names when using `cd`
-setopt cdspell;
+ENABLE_CORRECTION="true"

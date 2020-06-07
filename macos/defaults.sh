@@ -6,7 +6,6 @@ main() {
     configure_iterm2
     configure_system
     configure_energy_saving
-    configure_dock
     configure_finder
     configure_safari_webkit
     configure_spotlight
@@ -24,17 +23,20 @@ function configure_plist_apps() {
     quit "Transmission"
     quit "The Unarchiver"
     quit "Rectangle"
+    quit "Dock"
     import_plist "org.m0k.transmission" "Transmission.plist"
     import_plist "cx.c3.theunarchiver" "The_Unarchiver.plist"
     import_plist "com.knollsoft.Rectangle" "Rectangle.plist"
+    import_plist "com.apple.dock" "Dock.plist"
 }
 
 function configure_iterm2() {
+
+    defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -int 1
+    defaults write com.googlecode.iterm2 PrefsCustomFolder -string ~/dotfiles/iterm2
+
     # Only use UTF-8 in Terminal.app
     defaults write com.apple.terminal StringEncodings -array 4
-
-    # Install the Snazzy theme for iTerm: https://github.com/sindresorhus/iterm2-snazzy
-    open "../iterm2/snazzy-scheme-color.itermcolors"
 
     # Don’t display the annoying prompt when quitting iTerm
     defaults write com.googlecode.iterm2 PromptOnQuit -bool false
@@ -175,6 +177,8 @@ function configure_dock() {
     # Reset Launchpad, but keep the desktop wallpaper intact
     find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
 
+    # Set dock on the left side of the display
+    defaults write com.apple.dock orientation -string "right"
 
     # Add a spacer to the left side of the Dock (where the applications are)
     #defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
@@ -396,7 +400,6 @@ function kill_affected_apps() {
     quit "Photos"
     quit "Safari"
     quit "SystemUIServer"
-    quit "Terminal"
     quit "Transmission"
     echo "Done. Note that some of these changes require a logout/restart to take effect."
 }
