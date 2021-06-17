@@ -32,3 +32,13 @@ export MANPAGER='less -X';
 # Avoid issues with `gpg` as installed via Homebrew.
 # https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty);
+
+# JAVA
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+# Android SDK
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+
+# Flutter
+export PATH="$PATH:$HOME/flutter/bin/"
