@@ -15,4 +15,4 @@ setopt nocaseglob;
 setopt histappend;
 
 # Autocorrect typos in path names when using `cd`
-setopt cdspell;
+setopt CORRECT;
