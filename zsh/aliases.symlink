@@ -43,7 +43,7 @@ fi
 alias l="ls -lF ${colorflag}"
 
 # List all files colorized in long format, excluding . and ..
-alias lsa="ls -lah ${colorflag}"
+alias lsa="ls -lAFh ${colorflag}"
 
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
