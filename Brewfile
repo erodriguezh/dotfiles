@@ -38,4 +38,19 @@ cask "rectangle"
 cask "font-cascadia" # https://github.com/microsoft/cascadia-code
 cask "adoptopenjdk8"
 cask "android-sdk"
+cask "the-unarchiver"
+cask "spotify"
+cask "subtitles"
+cask "mpv"
+cask "obsidian"
+cask "google-chrome"
+cask "firefox"
+cask "visual-studio-code"
+cask "sourcetree"
+cask "skype"
+cask "franz"
+cask "transmission"
+cask "mullvadvpn"
 mas "Xcode", id: 497799835
+mas "Spark", id: 1176895641
+mas "Microsoft To Do", id: 1274495053
