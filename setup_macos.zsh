@@ -8,6 +8,18 @@ osascript -e 'tell application "System Preferences" to quit'
 # System Preferences
 ###########################
 
+PRIMARY_CLOUDFLARE_DNS_ADDRESS="1.1.1.1"
+SECONDARY_CLOUDFLARE_DNS_ADDRESS="1.0.0.1"
+FIRST_REDUNDANT_CLOUDFLARE_DNS_ADDRESS="2606:4700:4700::1111"
+SECOND_REDUNDANT_CLOUDFLARE_DNS_ADDRESS="2606:4700:4700::1001"
+
+# Update DNS servers to Cloudflare's servers https://one.one.one.one/dns/
+networksetup -setdnsservers Wi-Fi $PRIMARY_CLOUDFLARE_DNS_ADDRESS $SECONDARY_CLOUDFLARE_DNS_ADDRESS $FIRST_REDUNDANT_CLOUDFLARE_DNS_ADDRESS $SECOND_REDUNDANT_CLOUDFLARE_DNS_ADDRESS
+
+# Disable the sound effects on boot
+echo "Enter password to disable start up chime"
+sudo nvram SystemAudioVolume=" "
+
 # Set sidebar icon size to medium
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
@@ -35,6 +47,18 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Show battery percentage in menu bar
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.battery" -bool true
 defaults write com.apple.menuextra.battery '{ ShowPercent = YES; }'
+
+###########################
+# Energy Preferences
+###########################
+
+# Sleep the display after 15 minutes
+echo "Enter password to setup display sleep on power adapter"
+sudo pmset -a displaysleep 15
+
+# Set machine sleep to 5 minutes on battery
+echo "Enter password to setup display sleep on battery"
+sudo pmset -b sleep 5
 
 #########  
 # Finder
