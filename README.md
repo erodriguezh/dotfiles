@@ -9,13 +9,14 @@ Backup / sync everything:
 1. Run `mackup backup`
 2. Export Xcode certificates with private and public key
 3. Take a screenshot of the dock icons
-4. Folders: Downloads, Documents, Developer -> playground (run npkill before copying)
-5. Browser Bookmarks
+4. Run npkill and clean all node_module folders
+5. Backup User folder
+6. Backup Obsidian
 
 ## Restore Instructions
 
 1. `xcode-select --install`. We need this for `git`, among other things.
-2. `git clone https://ato-git-matrix.gtoffice.lan/erodr/dotfiles.git ~/.dotfiles`. We'll start with `https` but switch to `ssh` after everything is installed.
+2. `git clone https://github.com/erodriguezh/dotfiles ~/.dotfiles`. We'll start with `https` but switch to `ssh` after everything is installed.
 3. `cd ~/.dotfiles`
 4. `source install`
 5. Restart computer.
@@ -24,7 +25,7 @@ Backup / sync everything:
 
     ```zsh
     # Generate SSH key in default location (~/.ssh/config)
-    ssh-keygen -t rsa -b 4096 -C "my@email.com"
+    ssh-keygen -t rsa -b 4096 -C "erodriguezh@users.noreply.github.com"
 
     # Start the ssh-agent
     eval "$(ssh-agent -s)"
@@ -48,13 +49,11 @@ Backup / sync everything:
     ssh -T git@github.com
 
     # Switch from HTTPS to SSH
-    git remote set-url origin git@github.com:WhatsThatItsPat/dotfiles.git
+    git remote set-url origin git@github.com:erodriguezh/dotfiles.git
     ```
 
 ### Manual Steps
 
-1. Restore folders Downloads, Documents, Developer -> playground
-2. Restore google chrome bookmarks
-3. Arrange dock icon as shown in screenshot
-4. Install Xcode certificates
-5. Install https localhost certificate
+1. Restore User folder
+2. Arrange dock icon as shown in screenshot
+3. Install Xcode certificates
