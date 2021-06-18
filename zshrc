@@ -55,7 +55,7 @@ alias cddt="cd ~/Desktop"
 alias cddev="cd ~/Developer"
 
 ## Local configs
-alias envconfig="code ~/dotfiles/zsh"
+alias envconfig="code ~/.dotfiles"
 alias refreshconfig="source ~/.zshrc"
 
 ## Git
@@ -96,30 +96,7 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias mergepdf='gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
 
 # Copy public ssh key
-alias copyssh="pbcopy < ~/.ssh/id_ed25519.pub"
-
-## Matrix - Notes, Meetings
-alias osu="code ~/Documents/notes/standup.md"
-
-## Matrix - Shortcuts
-alias cdmatrix="cd ~/Developer/matrix-frontend"
-alias cdadmin="cd ~/Developer/matrix-admin"
-
-## Matrix - Go native
-alias gndebugbuild="./gradlew assembleDebug && cd app/build/outputs/apk/normal/debug && adb install *.apk"
-alias gnreleasebuild="./gradlew assembleRelease && cd app/build/outputs/apk"
-
-## Matrix - webserver
-alias webserver-refresh="docker-compose down && docker-compose up -d matrix-frontend-webserver && docker-compose exec matrix-frontend-webserver sh"
-
-## Matrix - Cash apps
-alias oldplugincleaninstall="cd ~/Developer/matrix-frontend/cordova/svch && rm -rf platforms plugins && cordova plugin add git+ssh://git@ato-git-matrix.gtoffice.lan:cbend/nsdlfcvplugin && cordova plugin add git+ssh://git@ato-git-matrix.gtoffice.lan:cbend/nsdlf-matrix-ch-extension"
-alias addchextensionplugin="cordova plugin add git+ssh://git@ato-git-matrix.gtoffice.lan:cbend/nsdlf-matrix-ch-extension"
-alias addplugin="cordova plugin add git+ssh://git@ato-git-matrix.gtoffice.lan:cbend/nsdlfcvplugin"
-alias addfatplugin="cordova plugin add git+ssh://git@ato-git-matrix.gtoffice.lan:cbend/nsdlfcvplugin_fat"
-alias plugincleaninstall="cd ~/Developer/matrix-frontend/cordova/svch && cordova plugin rm com.greentube.nsdlf.matrix.ch && cordova plugin rm novo-ios-app-integration && rm -rf platforms plugins && cordova plugin add git+ssh://git@ato-git-matrix.gtoffice.lan:cbend/nsdlf-minibundles-ch-live-extension.git && cordova plugin add git+ssh://git@ato-git-matrix.gtoffice.lan:cbend/matrix-game-integration-plugin.git"
-alias wholebuildprod="cd ~/Developer/matrix-frontend/cordova/svch && rm -rf platforms plugins && cd ~/Developer/matrix-frontend && npm run svch:mobile:prod:build && cd cordova/svch && npm run build:ios:simulator && open -a Xcode platforms/ios/"
-alias wholebuildstag="cd ~/Developer/matrix-frontend/cordova/svch && rm -rf platforms plugins && cd ~/Developer/matrix-frontend && npm run svch:mobile:stag:build && cd cordova/svch && npm run build:ios:simulator && open -a Xcode platforms/ios/"
+alias copyssh="pbcopy < ~/.ssh/id_rsa.pub"
 
 ######################################
 # Add Locations to the $path Variable
@@ -162,103 +139,6 @@ function bbd() {
     cd $startingDirectory;
   fi
 
-}
-
-## Matrix - Generate web build and build app. ma = matrix-apps
-function ma() {
-## Validations
-    if [ "$1" != "adro" ] && 
-       [ "$1" != "aduk" ] && 
-       [ "$1" != "esto" ] && 
-       [ "$1" != "feca" ] && 
-       [ "$1" != "sg" ] && 
-       [ "$1" != "svaes" ] && 
-       [ "$1" != "svait" ] && 
-       [ "$1" != "svch" ]
-    then
-        echo -e "Error: 1st parameter needs to be a value of adro, aduk, esto, feca, sg, svaes, svait, svch"
-        return
-    fi
-
-    if [ "$2" != "stag" ] &&
-       [ "$2" != "prod" ]
-    then
-        echo -e "Error: 2nd parameter needs to be a value of stag or prod"
-        return
-    fi
-
-    if [ "$3" != "android" ] && 
-       [ "$3" != "ios" ]
-    then
-        echo -e "Error: 3rd parameter needs to be a value of android or ios"
-        return
-    fi
-
-    if [ "$4" != "simulator" ] && 
-       [ "$4" != "device" ] &&
-       [ "$4" != "" ]
-    then
-        echo -e "Error: 4th parameter is optional and needs to be a value of simulator or device"
-        return
-    fi
-
-    if [ "$4" = "device" ] &&
-       [ "$5" = "" ]
-    then
-        echo -e "Error: 5th parameter is mandatory and needs to be a value of appstore, adhoc or debug"
-        return
-    fi
-
-    if [ "$5" != "appstore" ] && 
-       [ "$5" != "adhoc" ] &&
-       [ "$5" != "debug" ] &&
-       [ "$5" != "" ]
-    then
-        echo -e "Error: 5th parameter is optional and needs to be a value of appstore, adhoc or debug"
-        return
-    fi
-
-## Modifications
-
-    cordovaBuildType=""
-    openApp="open -a Xcode platforms/${3}/"
-
-    if [ "$4" = "simulator" ] || 
-       [ "$4" = "device" ] &&
-    then
-        cordovaBuildType=":${4}"
-    fi
-
-    if [ "$5" = "appstore" ] ||
-       [ "$5" = "adhoc" ] ||
-       [ "$5" = "debug" ]
-    then
-        cordovaBuildType="${cordovaBuildType}:${5}"
-    fi
-
-    # Old plugin 
-    # cd ~/Developer/matrix-frontend && npm run ${1}:mobile:${2}:build && cd cordova/${1} && npm run cordova:build:${3}${cordovaBuildType} && ${openApp}
-    
-    # New plugin
-    cd ~/Developer/matrix-frontend && npm run ${1}:mobile:${2}:build && cd cordova/${1} && npm run cordova:build:${3}:${2}${cordovaBuildType} && ${openApp}
-}
-
-## Matrix - Check nrgs version
-function nrgsversion() {
-    echo "ADRO:"
-    curl https://staging.admiral.ro/nrgs/en/api/healthCheck-v1
-    echo "\nADUK:"
-    curl https://staging.admiralcasino.co.uk/nrgs/en/api/healthCheck-v1
-    echo "\nFECA:"
-    curl https://staging.feniksscasino.lv/nrgs/en/api/healthCheck-v1
-    echo "\nSG:"
-    curl https://staging.stargames.de/nrgs/en/api/healthCheck-v1
-    echo "\nSVAES:"
-    curl https://staging.starvegas.es/nrgs/en/api/healthCheck-v1
-    echo "\nSVAIT:"
-    curl https://staging.starvegas.it/nrgs/en/api/healthCheck-v1
-    echo "\nSVCH:"
-    curl https://staging.starvegas.ch/nrgs/en/api/healthCheck-v1
 }
 
 #########
