@@ -17,7 +17,6 @@ fi
 npm install --global firebase-tools
 npm install --global @angular/cli
 npm install --global nativescript
-npm install --global cordova@9.0.0
 npm install --global npkill
 
 # Show what's installed?
