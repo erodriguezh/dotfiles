@@ -52,5 +52,9 @@ cask "skype"
 cask "franz"
 cask "transmission"
 cask "mullvadvpn"
+cask "nvidia-geforce-now"
+cask "android-file-transfer"
+cask "android-platform-tools"
+cask "gimp"
 mas "Spark", id: 1176895641
 mas "Microsoft To Do", id: 1274495053
