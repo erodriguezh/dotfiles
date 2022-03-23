@@ -9,7 +9,7 @@ if exists node; then
   echo "Node ($(node --version)) & NPM ($(npm --version)) already installed"
 else
   echo "Installing Node and NPM..."
-  n lts
+  n 14.19.1
 fi
 
 
@@ -18,6 +18,7 @@ npm install --global firebase-tools
 npm install --global @angular/cli
 npm install --global nativescript
 npm install --global npkill
+npm install --global yarn
 
 # Show what's installed?
 echo "Global NPM Packages Installed:"

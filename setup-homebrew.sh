@@ -2,9 +2,16 @@
 
 echo "\n~~~ Starting Hombrew Setup ~~~\n"
 
+# Check if Xcode is installed, otherwise quit
+if xcode-select -p 1>/dev/null; then
+  if [ $? = 2 ]; then
+    echo "Install Xcode from the Software Center"
+    exit 1
+  fi
+fi
+
 # This needs to happen earlier
 # xcode-select --install
-
 
 if exists brew; then
   echo "brew exists, skipping install"

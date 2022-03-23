@@ -15,13 +15,14 @@ Backup / sync everything:
 
 ## Restore Instructions
 
-1. `xcode-select --install`. We need this for `git`, among other things.
-2. `git clone https://github.com/erodriguezh/dotfiles ~/.dotfiles`. We'll start with `https` but switch to `ssh` after everything is installed.
-3. `cd ~/.dotfiles`
-4. `source install`
-5. Restart computer.
-6. `mackup restore`, might want to do `--dry-run` first
-7. Skip if ssh synched with Mackup: [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh), add to github, and switch remotes
+1. Install Xcode from Mac App Store
+2. `xcode-select --install`. We need this for `git`, among other things.
+3. `git clone https://github.com/erodriguezh/dotfiles ~/.dotfiles`. We'll start with `https` but switch to `ssh` after everything is installed.
+4. `cd ~/.dotfiles`
+5. `source install`
+6. Restart computer.
+7. `mackup restore`, might want to do `--dry-run` first
+8. Skip if ssh synched with Mackup: [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh), add to github, and switch remotes
 
     ```zsh
     # Generate SSH key in default location (~/.ssh/config)

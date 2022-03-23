@@ -31,7 +31,10 @@ export TIME_STYLE=long-iso
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Java
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+
+# Ruby
+export RUBY_HOME="/usr/local/lib/ruby/gems/2.7.0"
 
 # Android
 export ANDROID_SDK_ROOT="~/Library/Android/sdk"
@@ -109,6 +112,7 @@ path=(
   "$ANDROID_SDK_ROOT/tools"
   "$ANDROID_SDK_ROOT/bin"
   "$ANDROID_SDK_ROOT/emulator"
+  "$RUBY_HOME/bin"
   $path
   "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 )

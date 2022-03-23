@@ -4,7 +4,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "AdoptOpenJDK/openjdk"
+tap "homebrew/cask-versions"
 # Distributed revision control system
 brew "git"
 # The fastest shell plugin manager
@@ -29,6 +29,7 @@ brew "n"
 brew "zsh"
 # Dependency for Nativescript
 brew "python"
+brew "ruby@2.7", link: true
 # Bash scripts that integrate bat with various command-line tools
 brew "eth-p/software/bat-extras"
 cask "kitty"
@@ -36,7 +37,7 @@ cask "bitwarden"
 cask "free-ruler"
 cask "rectangle"
 cask "font-cascadia" # https://github.com/microsoft/cascadia-code
-cask "adoptopenjdk8"
+cask "temurin11"
 cask "android-sdk"
 cask "the-unarchiver"
 cask "spotify"
@@ -51,6 +52,5 @@ cask "skype"
 cask "franz"
 cask "transmission"
 cask "mullvadvpn"
-mas "Xcode", id: 497799835
 mas "Spark", id: 1176895641
 mas "Microsoft To Do", id: 1274495053
