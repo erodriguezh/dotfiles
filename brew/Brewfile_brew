@@ -1,8 +1,0 @@
-brew "coreutils" # for awesome commands like timeout
-brew "moreutils"
-brew "findutils"
-brew "gnu-sed"
-brew "grep"
-brew "zsh"
-brew "gmp"
-brew "antibody" # https://getantibody.github.io/links/
