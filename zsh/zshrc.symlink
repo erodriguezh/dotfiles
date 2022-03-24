@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+# load antibody plugins
+source ~/.zsh_plugins.sh
+
+[ -n "$PS1" ] && source ~/.user_profile;
+
+
