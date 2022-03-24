@@ -8,7 +8,7 @@ function gem_is_installed() {
   then
     error "No gem name specified.\n" && exit 1
   fi
-  [[ "$(gem query -i -n "^t$")" == "true" ]]
+  [[ "$(gem list "^${1:-}$" -i)" == "true" ]]
 }
 
 if exists ns; then
@@ -35,12 +35,6 @@ else
     mkdir -p ~/.android && touch ~/.android/repositories.cfg
   fi
 
-  echo "Install Android SDK dependencies"
-  /usr/local/share/android-sdk/tools/bin/sdkmanager "tools" "emulator" "platform-tools" "platforms;android-32" "build-tools;32.0.3" "extras;android;m2repository" "extras;google;m2repository" "sources;android-32" "system-images;android-32;google_apis;x86_64"
-  echo "Accept all software licenses"
-  /usr/local/share/android-sdk/tools/bin/sdkmanager --licenses
-  echo "Create Pixel Emulator"
-  /usr/local/share/android-sdk/tools/bin/avdmanager create avd -n Pixel -k 'system-images;android-32;google_apis;x86_64' -d 17
   echo "Add keyboard forwarding for Android emulator"
   for file in ~/.android/avd/*avd; do 
     if cat $file/config.ini | grep "hw.keyboard=yes" > /dev/null; then 

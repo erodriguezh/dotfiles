@@ -6,23 +6,32 @@ Assuming you're not dealing with a theft or drive failure, do what you can to ba
 
 Backup / sync everything:
 
-1. Run `mackup backup`
-2. Export Xcode certificates with private and public key
-3. Take a screenshot of the dock icons
-4. Run npkill and clean all node_module folders
-5. Backup User folder
-6. Backup Obsidian
+- Commit and Push to remote repositories
+- Run npkill and clean all node_module folders
+- Run `code --list-extensions > vscode_extensions` from `~/.dotfiles` to export [VS Code extensions](vscode_extensions)
+- Run `mackup backup`
+- Export Xcode certificates with private and public key
+- Take a screenshot of the dock icons and Finder favorites
+- Backup User folder
+- Backup Obsidian
+
+Deactivate licenses:
+
+- Dropbox (`Preferences > Account > Unlink`)
+
+[Create a bootable USB installer for macOS](https://support.apple.com/en-us/HT201372).
 
 ## Restore Instructions
 
 1. Install Xcode from Mac App Store
-2. `xcode-select --install`. We need this for `git`, among other things.
-3. `git clone https://github.com/erodriguezh/dotfiles ~/.dotfiles`. We'll start with `https` but switch to `ssh` after everything is installed.
-4. `cd ~/.dotfiles`
-5. `source install`
+2. `xcode-select --install`. We need this for `git`, among other things. (if stuck on "Finding Software" install it [manually](https://developer.apple.com/download/more/))
+3. `git clone https://github.com/erodriguezh/dotfiles ~/dotfiles`. We'll start with `https` but switch to `ssh` after everything is installed.
+4. `cd ~/dotfiles`
+5. `./install`
 6. Restart computer.
-7. `mackup restore`, might want to do `--dry-run` first
-8. Skip if ssh synched with Mackup: [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh), add to github, and switch remotes
+7. Setup up Dropbox (use multifactor authentication!) and allow files to sync before setting up dependent applications. Mackup depends on this (and thus so do Terminal and VS Code).
+8. `mackup restore`. Consider doing a `mackup restore --dry-run --verbose` first.
+9. Skip if ssh synched with Mackup: [Generate ssh key](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh), add to github, and switch remotes
 
     ```zsh
     # Generate SSH key in default location (~/.ssh/config)
@@ -48,13 +57,27 @@ Backup / sync everything:
     # Test SSH connection, then verify fingerprint and username
     # https://help.github.com/en/github/authenticating-to-github/testing-your-ssh-connection
     ssh -T git@github.com
-
-    # Switch from HTTPS to SSH
-    git remote set-url origin git@github.com:erodriguezh/dotfiles.git
     ```
+
+10. Switch from HTTPS to SSH `cd ~/dotfiles && git remote set-url origin git@github.com:erodriguezh/dotfiles.git`
 
 ### Manual Steps
 
-1. Restore User folder
+#### Nativescript
+
+1. Open Android Studio and install tools reccommended, install 1 emulator and intall command line tools
+2. Run Nativescript installation: `cd ~/dotfiles && ./setup-nativescript.sh`
+
+#### Files & Finder
+
+1. Restore folders: Downloads, Documents, Developer, Movies
 2. Arrange dock icon as shown in screenshot
-3. Install Xcode certificates
+3. Arrange Finder Favorites as shown in screenshot
+
+#### Chrome
+
+1. Restore Google Chrome Sync
+
+#### Dev
+
+1. Install Xcode certificates

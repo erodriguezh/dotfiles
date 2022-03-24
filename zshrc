@@ -1,6 +1,6 @@
 echo 'Hello from .zshrc'
 # Change #3 in another file on local. Shouldn't be able to push until I pull.
-test-webui-merge-2 3rd change in another file
+# test-webui-merge-2 3rd change in another file
 
 ##########
 # Exports
@@ -37,9 +37,9 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 export RUBY_HOME="/usr/local/lib/ruby/gems/2.7.0"
 
 # Android
-export ANDROID_SDK_ROOT="~/Library/Android/sdk"
-export ANDROID_HOME="$ANDROID_SDK_ROOT"
-export ANDROID_AVD_HOME="~/.android/avd/"
+export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+export ANDROID_AVD_HOME="$HOME/.android/avd/"
 
 ##########
 # Aliases
@@ -75,6 +75,7 @@ alias nr='npm run'
 
 # List all files colorized in long format
 alias ls='exa -laFh --git'
+alias lsa='exa -laFh --git'
 alias exa='exa -laFh --git'
 
 # Print path array separating each item on a new line

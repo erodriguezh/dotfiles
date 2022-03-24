@@ -36,9 +36,9 @@ cask "kitty"
 cask "bitwarden"
 cask "free-ruler"
 cask "rectangle"
-cask "font-cascadia" # https://github.com/microsoft/cascadia-code
+cask "font-cascadia-code" # https://github.com/microsoft/cascadia-code
 cask "temurin11"
-cask "android-sdk"
+cask "android-studio"
 cask "the-unarchiver"
 cask "spotify"
 cask "subtitles"
@@ -56,5 +56,6 @@ cask "nvidia-geforce-now"
 cask "android-file-transfer"
 cask "android-platform-tools"
 cask "gimp"
+cask "dropbox"
 mas "Spark", id: 1176895641
 mas "Microsoft To Do", id: 1274495053
