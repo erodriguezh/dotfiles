@@ -38,7 +38,7 @@ else
 fi
 
 # Setup antibody plugins
-antibody bundle <"~/dotfiles/antibody_plugins.txt" > ~/.zsh_plugins.sh
+antibody bundle <"$HOME/dotfiles/antibody_plugins.txt" > ~/.zsh_plugins.sh
 antibody update
 
 

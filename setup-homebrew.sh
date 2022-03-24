@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-echo "\n~~~ Starting Hombrew Setup ~~~\n"
+echo "\n~~~ Starting Homebrew Setup ~~~\n"
 
 # Check if Xcode is installed, otherwise quit
 if xcode-select -p 1>/dev/null; then
@@ -9,9 +9,6 @@ if xcode-select -p 1>/dev/null; then
     exit 1
   fi
 fi
-
-# This needs to happen earlier
-# xcode-select --install
 
 if exists brew; then
   echo "brew exists, skipping install"
@@ -22,28 +19,29 @@ fi
 
 
 # TODO: Keep an eye out for a different `--no-quarantine` solution.
-# It's currently exported in zshrc:
-# export HOMEBREW_CASK_OPTS="--no-quarantine"
+# Currently, you can't do `brew bundle --no-quarantine` as an option.
+# export HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"
 # https://github.com/Homebrew/homebrew-bundle/issues/474
+
+# HOMEBREW_CASK_OPTS is exported in `zshenv` with
+# `--no-quarantine` and `--no-binaries` options,
+# which makes them available to Homebrew for the
+# first install (before our `zshrc` is sourced).
+
 brew bundle --verbose
 
-
-
-# Post-Homebrew Items...better name?
-# This can be for app-related things that don't fit elsewhere. The iTerm stuff uses the defaults api so is good in macos_setup.
-
-# compaudit
-echo "fix any compaudit issues?"
-# https://docs.brew.sh/Shell-Completion
-# chmod go-w "$(brew --prefix)/share"
-# compaudit | xargs chmod g-w
-
-# Put this in a conditional to see if xcodebuild exists?
-echo "Enter password to accept Xcode license"
+# Should we wrap this in a conditional?
+echo "Enter superuser (sudo) password to accept Xcode license"
 sudo xcodebuild -license accept
+sudo xcodebuild -runFirstLaunch
 
-echo "Installing VS Code Extentions"
+
+echo "Installing VS Code Extensions"
 cat vscode_extensions | xargs -L 1 code --install-extension
 
 
-# should I have an exit here?
+# This works to solve the Insecure Directories issue:
+# compaudit | xargs chmod go-w
+# But this is from the Homebrew site, though `-R` was needed:
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+chmod -R go-w "$(brew --prefix)/share"
