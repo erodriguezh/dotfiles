@@ -23,7 +23,9 @@ if [[ $? != 0 ]] ; then
   exit 1
 fi
 
-
+echo "Disable Brew Analytics"
+brew analytics off
+export HOMEBREW_NO_ANALYTICS=1
 
 # TODO: Keep an eye out for a different `--no-quarantine` solution.
 # Currently, you can't do `brew bundle --no-quarantine` as an option.
