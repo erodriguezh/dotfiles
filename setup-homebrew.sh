@@ -14,8 +14,15 @@ if exists brew; then
   echo "brew exists, skipping install"
 else
   echo "brew doesn't exist, continuing with install"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+
+which -s brew
+if [[ $? != 0 ]] ; then
+  echo "Homebrew did not install. Exiting..."
+  exit 1
+fi
+
 
 
 # TODO: Keep an eye out for a different `--no-quarantine` solution.
