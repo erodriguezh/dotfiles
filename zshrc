@@ -36,6 +36,9 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 # Ruby
 export RUBY_HOME="/usr/local/lib/ruby/gems/2.7.0"
 
+# Pyhton
+export PYTHON_HOME=$(brew --prefix python)
+
 # Android
 export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
 export ANDROID_HOME=$ANDROID_SDK_ROOT
@@ -114,6 +117,7 @@ path=(
   "$ANDROID_SDK_ROOT/bin"
   "$ANDROID_SDK_ROOT/emulator"
   "$RUBY_HOME/bin"
+  "$PYTHON_HOME/libexec/bin"
   $path
   "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 )

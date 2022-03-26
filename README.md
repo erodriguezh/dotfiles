@@ -80,7 +80,7 @@ Deactivate licenses:
 #### Nativescript
 
 1. Open Android Studio and install tools reccommended, install 1 emulator and intall command line tools
-2. Run Nativescript installation: `cd ~/dotfiles && ./setup-nativescript.sh`
+2. Run Nativescript installation: `cd ~/dotfiles && ./setup-nativescript.zsh`
 
 #### Files & Finder
 

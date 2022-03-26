@@ -28,7 +28,7 @@ else
   echo "Setup Cocoapods"
   pod setup
   echo "Install python six package"
-  /usr/local/bin/pip3 install six
+  python -m pip install --upgrade pip
 
   if [ ! -f ~/.android/repositories.cfg ]; then
     echo "Create repositories.cfg if it does not exists"
