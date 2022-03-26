@@ -63,6 +63,20 @@ Deactivate licenses:
 
 ### Manual Steps
 
+#### SSH
+
+1. Copy both id_rsa and id_rsa.pub to ~/.ssh/
+2. Change file permissions and ownership of both files
+  
+    ```zsh
+    chown user:user ~/.ssh/id_rsa*
+    chmod 600 ~/.ssh/id_rsa
+    chmod 644 ~/.ssh/id_rsa.pub
+    ```
+
+3. Start the ssh-agent. `exec ssh-agent bash`
+4. Add your SSH private key to the ssh-agent. `ssh-add ~/.ssh/id_rsa`
+
 #### Nativescript
 
 1. Open Android Studio and install tools reccommended, install 1 emulator and intall command line tools
@@ -78,6 +92,6 @@ Deactivate licenses:
 
 1. Restore Google Chrome Sync
 
-#### Dev
+#### Dev Certificates
 
 1. Install Xcode certificates
