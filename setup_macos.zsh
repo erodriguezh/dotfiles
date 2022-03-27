@@ -53,8 +53,12 @@ defaults write com.apple.menuextra.battery '{ ShowPercent = YES; }'
 ###########################
 
 # Sleep the display after 15 minutes
-echo "Enter password to setup display sleep on power adapter"
+echo "Enter password to setup display sleep on both power adapter and battery"
 sudo pmset -a displaysleep 15
+
+# Disable machine sleep while charging
+echo "Enter password to setup sleep while charging"
+sudo pmset -c sleep 0
 
 # Set machine sleep to 5 minutes on battery
 echo "Enter password to setup display sleep on battery"
