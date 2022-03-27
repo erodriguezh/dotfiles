@@ -24,6 +24,9 @@
   - ~/Screenshots
 
 - shell:
+  - command: ./setup-prechecks.zsh
+    stdout: true
+    stderr: true
   - command: ./setup-homebrew.sh
     stdout: true
     stderr: true
